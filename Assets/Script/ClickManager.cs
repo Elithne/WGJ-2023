@@ -13,26 +13,37 @@ public class ClickManager : MonoBehaviour
     }
 
     public void GoToItem(ItemData item){
+        //update HintBox
+        gameManager.UpdateHintBox(null, false);
+        //Start Moving Player
         StartCoroutine(gameManager.MoveToPoint(player,item.goToPoint.position));
+        //Start Walking
         playerIsWalking = true;
+        //Equip Something
         TryGettingItem(item);
-        StartCoroutine(UpdateSceneAfterAction(item));
+
     }
 
     public void TryGettingItem(ItemData item){
-        if(item.requiredItemID == -1 || GameManager.collectedItems.Contains(item.requiredItemID)){         
+        bool canGetItem = item.requiredItemID == -1 || GameManager.collectedItems.Contains(item.requiredItemID);
+        if(canGetItem){         
             GameManager.collectedItems.Add(item.itemID);            
         }
+        StartCoroutine(UpdateSceneAfterAction(item, canGetItem));
     }
 
-    private IEnumerator UpdateSceneAfterAction(ItemData item){
+    private IEnumerator UpdateSceneAfterAction(ItemData item, bool canGetItem){
         while(playerIsWalking){
             yield return new WaitForSeconds(0.05f);
         }
-        foreach(GameObject g in item.itemsToRemove){
-            Destroy(g);
+        if(canGetItem){
+            foreach(GameObject g in item.itemsToRemove){
+                Destroy(g);
+            }
+            Debug.Log("Collected");
+        } else {
+            gameManager.UpdateHintBox(item, player.GetComponentInChildren<SpriteRenderer>().flipX);
         }
-        Debug.Log("Collected");
         yield return null;
     }
 }
