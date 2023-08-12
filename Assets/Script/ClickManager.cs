@@ -43,6 +43,7 @@ public class ClickManager : MonoBehaviour
             Debug.Log("Collected");
         } else {
             gameManager.UpdateHintBox(item, player.GetComponentInChildren<SpriteRenderer>().flipX);
+            gameManager.CheckSpecialCondition(item);
         }
         yield return null;
     }
