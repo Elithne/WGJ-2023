@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -77,8 +78,12 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(ChangeScene(0,1));
                 Debug.Log("Escene Cubista");
                 break;
-            case -1:
-                //win the game (With the Actual GameManager)
+            case -13:
+                SceneManager.LoadScene("Game"); 
+                break;
+            case -14:
+                SceneManager.LoadScene("GameOver"); 
+                Debug.Log("Game Over");
                 break;
         }
     }
