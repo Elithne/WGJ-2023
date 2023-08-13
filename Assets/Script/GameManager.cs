@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("GameOver"); 
                 Debug.Log("Game Over");
                 break;
+
+                
         }
     }
     public IEnumerator ChangeScene(int sceneNumber, float delay){
