@@ -1610,6 +1610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameTag: {fileID: 232359058}
   hintBox: {fileID: 714254024}
+  passwordCanvas: {fileID: 1477188708}
   blockingImage: {fileID: 1963986947}
   localScenes:
   - {fileID: 801589810}
@@ -4528,7 +4529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1477188709
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4597,7 +4598,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477188708}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 519420031}
@@ -4626,6 +4627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UiText: {fileID: 397208185}
+  destroyedItem: {fileID: 1565058521}
 --- !u!1 &1501598928
 GameObject:
   m_ObjectHideFlags: 0
@@ -4734,8 +4736,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5e6480782747b4fb20ba8f8f0ae142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 3
-  requiredItemID: -1
+  itemID: 4
+  requiredItemID: -100
   goToPoint: {fileID: 1568593254}
   itemName: Cage
   nameTagSize: {x: 3, y: 0.65}
@@ -4991,6 +4993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UiText: {fileID: 0}
+  destroyedItem: {fileID: 0}
 --- !u!1 &1647362167
 GameObject:
   m_ObjectHideFlags: 0

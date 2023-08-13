@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     float moveAccuracy = 0.15f;
     [Header("Setup")]
     public RectTransform nameTag, hintBox;
+    public GameObject passwordCanvas;
     
     [Header("Local Scene")]
     public Image blockingImage;
@@ -107,6 +108,10 @@ public class GameManager : MonoBehaviour
 
     public void CheckSpecialCondition(ItemData item){
         switch(item.itemID){
+            case 4:
+                passwordCanvas.GetComponent<Canvas>().enabled = true;
+                Debug.Log("Abre Password");
+                break;
             case -11:
                 //go to scene 2
                 StartCoroutine(ChangeScene(1,0));

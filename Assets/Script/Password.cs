@@ -8,6 +8,7 @@ public class Password : MonoBehaviour
 {
     //[SerializeField] private TMP_Text answer;
     [SerializeField] private TMP_Text UiText = null;
+    [SerializeField] private GameObject destroyedItem;
     string code ="2451";
     string Nr = null;
     int NrIndex = 0;
@@ -27,7 +28,9 @@ public class Password : MonoBehaviour
     public void Enter(){
         if(Nr == code){
             UiText.text = "Success!";
+            Destroy(destroyedItem.gameObject);
             Destroy(gameObject);
+            
             
         } else{
             UiText.text = "Error!";
@@ -42,6 +45,6 @@ public class Password : MonoBehaviour
     }
 
     public void Close(){
-        gameObject.SetActive(false);
+        gameObject.GetComponent<Canvas>().enabled = false;
     }
 }
