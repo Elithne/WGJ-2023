@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
     public AudioSource mx2;
     public AudioMixerSnapshot snap1;
     public AudioMixerSnapshot snap2;
-    public float FadeIn = 0.01f;
-    public float timeToReachTransition = 0.01f;
+    public float FadeIn = 0.001f;
+    public float timeToReachTransition = 0.001f;
     bool isPlaying1 = false;
     bool isPlaying2 = false;
 
@@ -49,12 +49,14 @@ public class GameManager : MonoBehaviour
             //subir volumen a musica expresionismo
             snap1.TransitionTo(timeToReachTransition);
             mx1.volume += FadeIn;
+            mx2.volume -= FadeIn;
         }
         if (isPlaying2)
         {
             //subir volumen a musica cubismo
             snap2.TransitionTo(timeToReachTransition); 
             mx2.volume += FadeIn;
+            mx1.volume -= FadeIn;
         }
     }
 
@@ -117,12 +119,14 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(ChangeScene(1,0));
                 Debug.Log("Escene Expresionista");
                 isPlaying1 = true;
+                isPlaying2 = false;
                 break;
             case -12:
                 //go to scene 1
                 StartCoroutine(ChangeScene(0,1));
                 Debug.Log("Escene Cubista");
                 isPlaying2 = true;
+                isPlaying1 = false;
                 break;
             case -13:
                 SceneManager.LoadScene("Game"); 
