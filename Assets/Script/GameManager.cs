@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public RectTransform nameTag, hintBox;
     public GameObject passwordCanvas;
     public GameObject papyrus;
+    public GameObject finalItem;
     
     [Header("Local Scene")]
     public Image blockingImage;
@@ -73,11 +74,11 @@ public class GameManager : MonoBehaviour
 
 
     public IEnumerator MoveToPoint(Transform myObject, Vector2 point){
-        // if(GetComponentInChildren<SpriteRenderer>() &&  positionDifference.x != 0){
-        //     GetComponentInChildren<SpriteRenderer>().flipX = ositionDifference.x > 0;
-        // }
         //Calculate position difference
         Vector2 positionDifference = point - (Vector2)myObject.position; 
+        if(GetComponent<SpriteRenderer>() &&  positionDifference.x != 0){
+             GetComponent<SpriteRenderer>().flipX = positionDifference.x > 0;
+         }
         //stop when we are nar that point
         while(positionDifference.magnitude > moveAccuracy){
             //move in direction frame
@@ -125,6 +126,11 @@ public class GameManager : MonoBehaviour
                 passwordCanvas.GetComponent<Canvas>().enabled = true;
                 Debug.Log("Abre Password");
                 break;
+
+            case 22:
+                finalItem.gameObject.SetActive(true);
+                break;
+
             case -11:
                 //go to scene 2
                 StartCoroutine(ChangeScene(1,0));

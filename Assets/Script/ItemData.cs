@@ -14,7 +14,7 @@ public class ItemData : MonoBehaviour
     public GameObject[] itemsToRemove;
 
     [Header("Failure")]
-    [TextArea(3,3)]
+    [TextArea(5,5)]
     public string hintMessage;
     public Vector2 hintBoxSize = new Vector2(4,0.65f);
 }
