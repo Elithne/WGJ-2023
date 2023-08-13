@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
         mx2.volume = 0;
         mx1.Play();
         mx2.Play();
+        isPlaying1 = true;
+        isPlaying2 = false;
     }
 
     void Update()
@@ -126,19 +128,24 @@ public class GameManager : MonoBehaviour
             case -11:
                 //go to scene 2
                 StartCoroutine(ChangeScene(1,0));
-                isPlaying1 = true;
-                isPlaying2 = false;
-                spriteRenderer.sprite = cubist; 
+                
+                spriteRenderer.sprite = cubist;
+                isPlaying2 = true;
+                isPlaying1 = false;
                 break;
             case -12:
                 //go to scene 1
                 StartCoroutine(ChangeScene(0,1));
-                isPlaying2 = true;
-                isPlaying1 = false;
-                spriteRenderer.sprite = expresionist; 
+                
+                spriteRenderer.sprite = expresionist;
+                
+                isPlaying1 = true;
+                isPlaying2 = false;
                 break;
             case -13:
-                SceneManager.LoadScene("Game"); 
+                SceneManager.LoadScene("Game");
+                isPlaying1 = true;
+                isPlaying2 = false;
                 break;
             case -14:
                 SceneManager.LoadScene("GameOver"); 
