@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Header("Setup")]
     public RectTransform nameTag, hintBox;
     public GameObject passwordCanvas;
+    public GameObject papyrus;
     
     [Header("Local Scene")]
     public Image blockingImage;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     public Transform[] playerStartPositions;
 
     //Audio
+    [Header("Audio")]
     public AudioSource mx1;
     public AudioSource mx2;
     public AudioMixerSnapshot snap1;
@@ -30,6 +32,13 @@ public class GameManager : MonoBehaviour
     public float timeToReachTransition = 0.001f;
     bool isPlaying1 = false;
     bool isPlaying2 = false;
+
+    //Sprites
+    [Header("Sprites")]
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Sprite cubist;
+    [SerializeField] Sprite expresionist;
+
 
 
 
@@ -117,16 +126,16 @@ public class GameManager : MonoBehaviour
             case -11:
                 //go to scene 2
                 StartCoroutine(ChangeScene(1,0));
-                Debug.Log("Escene Expresionista");
                 isPlaying1 = true;
                 isPlaying2 = false;
+                spriteRenderer.sprite = cubist; 
                 break;
             case -12:
                 //go to scene 1
                 StartCoroutine(ChangeScene(0,1));
-                Debug.Log("Escene Cubista");
                 isPlaying2 = true;
                 isPlaying1 = false;
+                spriteRenderer.sprite = expresionist; 
                 break;
             case -13:
                 SceneManager.LoadScene("Game"); 

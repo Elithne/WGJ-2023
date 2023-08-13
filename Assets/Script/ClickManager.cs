@@ -40,6 +40,9 @@ public class ClickManager : MonoBehaviour
             foreach(GameObject g in item.itemsToRemove){
                 Destroy(g);
             }
+            
+            Debug.Log(item);
+            Debug.Log(canGetItem);
             Debug.Log("Collected");
         } else {
             gameManager.UpdateHintBox(item, player.GetComponentInChildren<SpriteRenderer>().flipX);
