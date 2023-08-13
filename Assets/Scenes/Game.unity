@@ -1622,8 +1622,8 @@ MonoBehaviour:
   mx2: {fileID: 1324997967}
   snap1: {fileID: 6459601936350916233, guid: 899a47af2c91d9c428fbba5014ab6c6c, type: 2}
   snap2: {fileID: -7523110446832607231, guid: 899a47af2c91d9c428fbba5014ab6c6c, type: 2}
-  FadeIn: 0.01
-  timeToReachTransition: 0.01
+  FadeIn: 0.001
+  timeToReachTransition: 0.001
 --- !u!1 &568500745
 GameObject:
   m_ObjectHideFlags: 0
