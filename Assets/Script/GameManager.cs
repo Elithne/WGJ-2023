@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,7 +20,45 @@ public class GameManager : MonoBehaviour
     int activeLocalScene = 0;
     public Transform[] playerStartPositions;
 
-     public IEnumerator MoveToPoint(Transform myObject, Vector2 point){
+    //Audio
+    public AudioSource mx1;
+    public AudioSource mx2;
+    public AudioMixerSnapshot snap1;
+    public AudioMixerSnapshot snap2;
+    public float FadeIn = 0.01f;
+    public float timeToReachTransition = 0.01f;
+    bool isPlaying1 = false;
+    bool isPlaying2 = false;
+
+
+
+    void Start()
+    {
+        //musica comienza a reproducirse, pero sin volumen (para sincro)
+        mx1.volume = 0;
+        mx2.volume = 0;
+        mx1.Play();
+        mx2.Play();
+    }
+
+    void Update()
+    {
+        if (isPlaying1)
+        {
+            //subir volumen a musica expresionismo
+            snap1.TransitionTo(timeToReachTransition);
+            mx1.volume += FadeIn;
+        }
+        if (isPlaying2)
+        {
+            //subir volumen a musica cubismo
+            snap2.TransitionTo(timeToReachTransition); 
+            mx2.volume += FadeIn;
+        }
+    }
+
+
+    public IEnumerator MoveToPoint(Transform myObject, Vector2 point){
         // if(GetComponentInChildren<SpriteRenderer>() &&  positionDifference.x != 0){
         //     GetComponentInChildren<SpriteRenderer>().flipX = ositionDifference.x > 0;
         // }
@@ -72,11 +111,13 @@ public class GameManager : MonoBehaviour
                 //go to scene 2
                 StartCoroutine(ChangeScene(1,0));
                 Debug.Log("Escene Expresionista");
+                isPlaying1 = true;
                 break;
             case -12:
                 //go to scene 1
                 StartCoroutine(ChangeScene(0,1));
                 Debug.Log("Escene Cubista");
+                isPlaying2 = true;
                 break;
             case -13:
                 SceneManager.LoadScene("Game"); 
