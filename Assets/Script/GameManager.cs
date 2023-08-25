@@ -36,12 +36,10 @@ public class GameManager : MonoBehaviour
 
     //Sprites
     [Header("Sprites")]
+    [SerializeField]Animator animator;
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite cubist;
-    [SerializeField] Sprite expresionist;
-
-
-
+    // [SerializeField] Sprite cubist;
+    // [SerializeField] Sprite expresionist;
 
     void Start()
     {
@@ -74,23 +72,26 @@ public class GameManager : MonoBehaviour
 
 
     public IEnumerator MoveToPoint(Transform myObject, Vector2 point){
+        
         //Calculate position difference
         Vector2 positionDifference = point - (Vector2)myObject.position; 
-        if(GetComponent<SpriteRenderer>() &&  positionDifference.x != 0){
-             GetComponent<SpriteRenderer>().flipX = positionDifference.x > 0;
+        if(myObject.GetComponentInChildren<SpriteRenderer>() &&  positionDifference.x != 0){
+             myObject.GetComponentInChildren<SpriteRenderer>().flipX = positionDifference.x < 0;
          }
         //stop when we are nar that point
         while(positionDifference.magnitude > moveAccuracy){
+            animator.SetBool("isWalking", true);
             //move in direction frame
             myObject.Translate(moveSpeed*positionDifference.normalized  * Time.deltaTime);
             //recalculate position difference
-            positionDifference = point - (Vector2)myObject.position;
+            positionDifference = point - (Vector2)myObject.position;            
             yield return null;
         }
         //snap to point
         myObject.position = point;
         if(myObject == FindObjectOfType<ClickManager>().player){
             FindObjectOfType<ClickManager>().playerIsWalking = false;
+            animator.SetBool("isWalking", false);
         }
         yield return null;
     }
@@ -122,6 +123,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckSpecialCondition(ItemData item){
         switch(item.itemID){
+
             case 4:
                 passwordCanvas.GetComponent<Canvas>().enabled = true;
                 Debug.Log("Abre Password");
@@ -133,20 +135,23 @@ public class GameManager : MonoBehaviour
 
             case -11:
                 //go to scene 2
+               
                 StartCoroutine(ChangeScene(1,0));
-                
-                spriteRenderer.sprite = cubist;
+                 animator.SetBool("isCubist", true);             
+                // spriteRenderer.sprite = cubist;               
                 isPlaying2 = true;
                 isPlaying1 = false;
+                
                 break;
             case -12:
                 //go to scene 1
-                StartCoroutine(ChangeScene(0,1));
                 
-                spriteRenderer.sprite = expresionist;
-                
+                StartCoroutine(ChangeScene(0,1));   
+                animator.SetBool("isCubist", false);            
+                // spriteRenderer.sprite = expresionist;                         
                 isPlaying1 = true;
                 isPlaying2 = false;
+
                 break;
             case -13:
                 SceneManager.LoadScene("Game");
